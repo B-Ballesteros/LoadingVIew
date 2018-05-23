@@ -10,7 +10,7 @@ import UIKit
 
 extension UIViewController {
     public func showLoadingView(){
-        showLoadingView(with: .blue)
+        showLoadingView(with: .white)
     }
     
     public func showLoadingView(with color: UIColor) {
