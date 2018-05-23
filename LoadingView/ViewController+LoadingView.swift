@@ -30,26 +30,33 @@ extension UIViewController {
     }
     
     fileprivate func addSpinningWheel(to aView: UIView){
-        let width = aView.frame.width
-        let height = aView.frame.height
+        let layer = createRingLayer(for: aView, radiusFactor: 0.8, speed: 1, clockwise: false)
+        aView.layer.addSublayer(layer)
+    }
+    
+    fileprivate func createRingLayer(for view: UIView, radiusFactor: CGFloat, speed: Double, clockwise: Bool) ->CAShapeLayer {
+        let width = view.frame.width
+        let height = view.frame.height
         let squareLength = height > width ? width : height
-        let raidus = (squareLength / 2) * 0.8
+        let raidus = (squareLength / 2) * radiusFactor
         let frame = CGRect(x: (width - squareLength) / 2, y: (height - squareLength) / 2, width: squareLength, height: squareLength)
         let xCenter = frame.width / 2
         let yCEnter = frame.height / 2
         let center = CGPoint(x: xCenter, y: yCEnter)
         let path = UIBezierPath(arcCenter: center, radius: raidus, startAngle: convertToRadians(angle: 0), endAngle: convertToRadians(angle: 360), clockwise: true)
-        let layer = CAShapeLayer(layer: aView.layer)
+        let layer = CAShapeLayer(layer: view.layer)
         layer.path = path.cgPath
         layer.frame = frame
         layer.strokeColor = UIColor.white.cgColor
         layer.strokeStart = 0.2
-        layer.strokeEnd = 1
+        layer.strokeEnd = 1.5
         layer.lineWidth = 15
         layer.lineCap = kCALineCapRound
         layer.fillColor = UIColor.clear.cgColor
-        aView.layer.addSublayer(layer)
-        animate(layer: layer, keyPath: "transform.rotation", duration: 1, from: convertToRadians(angle: 0), to: convertToRadians(angle: 360))
+        let startAngle: CGFloat = clockwise ? 0 : 360
+        let endAngle: CGFloat = clockwise ? 360 : 0
+        animate(layer: layer, keyPath: "transform.rotation", duration: speed, from: convertToRadians(angle: startAngle), to: convertToRadians(angle: endAngle))
+        return layer
     }
     
     fileprivate func convertToRadians(angle: CGFloat) -> CGFloat{
