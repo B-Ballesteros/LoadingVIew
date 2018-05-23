@@ -9,14 +9,6 @@
 import UIKit
 
 class LoadingView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
     
     static let identifier = 5623444 //5623444 translates to 'loading' in numeric pad
     
@@ -53,18 +45,10 @@ class LoadingView: UIView {
     fileprivate func createRingLayer(using frame: CGRect, radiusFactor: CGFloat, speed: Double, clockwise: Bool) ->CAShapeLayer {
         let layerFrame = createLayerFrame(from: frame)
         let path = createLayerPath(with: radiusFactor, for: layerFrame)
-//        let width = frame.width
-//        let height = frame.height
-//        let squareLength = height > width ? width : height
-//        let raidus = (squareLength / 2) * radiusFactor
-//        let layerFrame = CGRect(x: (width - squareLength) / 2, y: (height - squareLength) / 2, width: squareLength, height: squareLength)
-//        let xCenter = layerFrame.width / 2
-//        let yCEnter = layerFrame.height / 2
-//        let center = CGPoint(x: xCenter, y: yCEnter)
         let startAngle: CGFloat = clockwise ? 0 : .pi * 2
         let endAngle: CGFloat = clockwise ? .pi * 2 : 0
-//        let path = UIBezierPath(arcCenter: center, radius: raidus, startAngle: 0, endAngle: .pi * 2, clockwise: true)
         let layer = CAShapeLayer()
+        
         layer.path = path.cgPath
         layer.frame = layerFrame
         layer.strokeColor = UIColor.white.cgColor
