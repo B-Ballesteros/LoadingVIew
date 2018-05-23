@@ -21,11 +21,22 @@ class ViewController: UIViewController {
     }
 
     @IBAction func testTapped(_ sender: Any) {
-        showLoadingView()
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(10)) {
+        showLoadingView(with: .random)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4)) {
             self.hideLoadingView()
         }
     }
     
+}
+extension CGFloat {
+    static var random: CGFloat {
+        return CGFloat(arc4random()) / CGFloat(UInt32.max)
+    }
+}
+
+extension UIColor {
+    static var random: UIColor {
+        return UIColor(red: .random, green: .random, blue: .random, alpha: 1.0)
+    }
 }
 
