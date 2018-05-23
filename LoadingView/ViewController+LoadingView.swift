@@ -30,8 +30,12 @@ extension UIViewController {
     }
     
     fileprivate func addSpinningWheel(to aView: UIView){
-        let layer = createRingLayer(for: aView, radiusFactor: 0.8, speed: 1, clockwise: false)
-        aView.layer.addSublayer(layer)
+        let firstRing = createRingLayer(for: aView, radiusFactor: 0.8, speed: 1, clockwise: false)
+        let secondRing = createRingLayer(for: aView, radiusFactor: 0.6, speed: 0.8, clockwise: true)
+        let thirdRing = createRingLayer(for: aView, radiusFactor: 0.4, speed: 0.6, clockwise: false)
+        aView.layer.addSublayer(firstRing)
+        aView.layer.addSublayer(secondRing)
+        aView.layer.addSublayer(thirdRing)
     }
     
     fileprivate func createRingLayer(for view: UIView, radiusFactor: CGFloat, speed: Double, clockwise: Bool) ->CAShapeLayer {
