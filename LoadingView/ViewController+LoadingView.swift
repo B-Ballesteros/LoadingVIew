@@ -30,12 +30,10 @@ extension UIViewController {
     }
     
     fileprivate func addSpinningWheel(to aView: UIView){
-        let firstRing = createRingLayer(for: aView, radiusFactor: 0.8, speed: 1, clockwise: false)
-        let secondRing = createRingLayer(for: aView, radiusFactor: 0.6, speed: 0.8, clockwise: true)
-        let thirdRing = createRingLayer(for: aView, radiusFactor: 0.4, speed: 0.6, clockwise: false)
+        let firstRing = createRingLayer(for: aView, radiusFactor: 0.6, speed: 1, clockwise: false)
+        let secondRing = createRingLayer(for: aView, radiusFactor: 0.5, speed: 1, clockwise: true)
         aView.layer.addSublayer(firstRing)
         aView.layer.addSublayer(secondRing)
-        aView.layer.addSublayer(thirdRing)
     }
     
     fileprivate func createRingLayer(for view: UIView, radiusFactor: CGFloat, speed: Double, clockwise: Bool) ->CAShapeLayer {
@@ -54,12 +52,13 @@ extension UIViewController {
         layer.strokeColor = UIColor.white.cgColor
         layer.strokeStart = 0.2
         layer.strokeEnd = 1.5
-        layer.lineWidth = 15
-        layer.lineCap = kCALineCapRound
+        layer.lineWidth = 10
+        layer.lineCap = kCALineCapButt
         layer.fillColor = UIColor.clear.cgColor
         let startAngle: CGFloat = clockwise ? 0 : 360
         let endAngle: CGFloat = clockwise ? 360 : 0
-        animate(layer: layer, keyPath: "transform.rotation", duration: speed, from: convertToRadians(angle: startAngle), to: convertToRadians(angle: endAngle))
+        animate(layer: layer, keyPath: "transform.rotation", duration: speed, from: convertToRadians(angle: startAngle), to: convertToRadians(angle: endAngle), autoreverse: false)
+        animate(layer: layer, keyPath: "strokeColor", duration: speed / 2, from: UIColor.white.cgColor, to: UIColor.gray.cgColor, autoreverse: true)
         return layer
     }
     
@@ -68,12 +67,13 @@ extension UIViewController {
     }
     
     
-    fileprivate func animate(layer: CALayer, keyPath: String, duration: Double, from value: CGFloat, to endValue: CGFloat){
+    fileprivate func animate(layer: CALayer, keyPath: String, duration: Double, from value: Any, to endValue: Any, autoreverse: Bool){
         let animation = CABasicAnimation(keyPath: keyPath)
         animation.fromValue = value
         animation.toValue = endValue
         animation.duration = duration
         animation.repeatCount = .infinity
+        animation.autoreverses = autoreverse
         layer.add(animation, forKey: nil)
     }
 }
