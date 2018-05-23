@@ -22,7 +22,7 @@ class ViewController: UIViewController {
 
     @IBAction func testTapped(_ sender: Any) {
         showLoadingView()
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(10)) {
             self.hideLoadingView()
         }
     }
