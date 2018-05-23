@@ -20,6 +20,12 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    @IBAction func testTapped(_ sender: Any) {
+        showLoadingView()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4)) {
+            self.hideLoadingView()
+        }
+    }
+    
 }
 
