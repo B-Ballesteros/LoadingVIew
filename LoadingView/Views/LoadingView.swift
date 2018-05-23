@@ -12,6 +12,14 @@ class LoadingView: UIView {
     
     static let identifier = 5623444 //5623444 translates to 'loading' in numeric pad
     
+    fileprivate var color = UIColor.white
+    
+    init(frame: CGRect, color: UIColor) {
+        super.init(frame: frame)
+        self.color = color
+        configure()
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -48,7 +56,7 @@ class LoadingView: UIView {
         let startAngle: CGFloat = clockwise ? 0 : .pi * 2
         let endAngle: CGFloat = clockwise ? .pi * 2 : 0
         let layer = CAShapeLayer()
-        
+        let endColor = UIColor.gray.cgColor
         layer.path = path.cgPath
         layer.frame = layerFrame
         layer.strokeColor = UIColor.white.cgColor
@@ -59,7 +67,8 @@ class LoadingView: UIView {
         layer.fillColor = UIColor.clear.cgColor
         
         animate(layer: layer, keyPath: "transform.rotation", duration: speed, from: startAngle, to: endAngle, autoreverse: false)
-        animate(layer: layer, keyPath: "strokeColor", duration: speed / 2, from: UIColor.white.cgColor, to: UIColor.gray.cgColor, autoreverse: true)
+        
+        animate(layer: layer, keyPath: "strokeColor", duration: speed / 2, from: color.cgColor, to: endColor, autoreverse: true)
         return layer
     }
     

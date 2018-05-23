@@ -10,8 +10,12 @@ import UIKit
 
 extension UIViewController {
     public func showLoadingView(){
+        showLoadingView(with: .blue)
+    }
+    
+    public func showLoadingView(with color: UIColor) {
         let frame = UIScreen.main.bounds
-        let loadingView = LoadingView(frame: frame)
+        let loadingView = LoadingView(frame: frame, color: color)
         view.isUserInteractionEnabled = false
         view.addSubview(loadingView)
     }
