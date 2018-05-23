@@ -11,7 +11,7 @@ import UIKit
 extension UIViewController {
     public func showLoadingView(){
         let frame = UIScreen.main.bounds
-        let color = UIColor.gray.withAlphaComponent(0.33)
+        let color = UIColor.black.withAlphaComponent(0.5)
         let loadingView = UIView(frame: frame)
         loadingView.backgroundColor = color
         loadingView.tag = 5623444 //5623444 translates to 'loading' in numeric pad
